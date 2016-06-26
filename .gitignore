@@ -1,0 +1,5 @@
+# database files
+*.db
+
+#test file
+db_test.py
