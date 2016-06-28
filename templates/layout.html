@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang='en'>
 <head>
 	<title>Flask Weather App</title>	
 	<meta charset="utf-8">
@@ -14,14 +14,41 @@
 
 	<div class='container'>
 
-		{% block body %}{% endblock %}
-
+		<nav class='navbar navbar-default' role='navigation'>
+			<div class='container-fluid'>
+				<div class='navbar-header'>
+					<a class='navbar-brand' href="{{ url_for('index') }}">flask-weather-app</a>
+				</div>
+				<form class='navbar-form navbar-right'action="{{ url_for('show_weather') }}" role='search' method=post>
+					<div class='form-group'>
+						<label for='city'>City</label>
+						<input type='text' id='q' class='form-control' placeholder='city name' name='city' required>
+					</div>
+					<div class='form-group'>
+						<label for='country_code'>Country code</label>
+						<input type='text' class='form-control' placeholder='2 letter country code' name='country_code' required>
+					</div>
+					<div class='form-group'>
+						<input type='submit' id='submit' class='btn btn-default' value='Submit'>
+					</div>
+				</form>
+			</div>
+		</nav>
 	</div>
+
+	{% if error %}<div class='container alert alert-danger alert-dismissible' role='alert'><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><strong>Error: </strong>{{ error }}</div>{% endif %}
+
+	{% block body %}
+		<div class='jumbotron' id='main'>
+			{% block content %}{% endblock %}
+		</div>
+	{% endblock %}
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" 
   	integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" 
   	crossorigin="anonymous"></script>
 	<script src="{{ url_for('static', filename='script.js') }}"></script>
+	<script src="{{ url_for('static', filename='typeahead.jquery.js') }}"></script>
 
 </body>

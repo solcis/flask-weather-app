@@ -1,8 +1,7 @@
 import os
-import sqlite3
-from flask import Flask, request, render_template, url_for, g, redirect, flash
-import pyowm, json, collections
-from datetime import date, timedelta
+from flask import Flask, request, render_template, g
+import pyowm, json, collections, sqlite3
+from datetime import date, timedelta, datetime
 from pyowm.exceptions.not_found_error import NotFoundError
 
 
@@ -17,7 +16,7 @@ app = Flask(__name__)
 
 # app configuration
 app.config.update(dict(
-    DATABASE=os.path.join(app.root_path, 'flask-weather-app.db'),
+    DATABASE=os.path.join(app.root_path, 'flask_weather_app.db'),
     SECRET_KEY='development key',
     USERNAME='admin',
     PASSWORD='default'
@@ -86,8 +85,8 @@ def index():
 @app.route('/weather', methods=['POST'])
 def show_weather():
     '''
-    Gets user's input from form and creates and Observation object if data is valid,
-    renders template with weather data from Observation
+    Gets user's input from form and tries to
+    get weather info  for current day and next 3 days
     '''
     # check if any field was not filled by user
     if request.form['city'] == '' or request.form['country_code'] == '':
@@ -141,25 +140,30 @@ def get_current_weather(id, code):
 
 def get_forecast(id):
     '''
-    Gets forecast for the remaining of current day and for the next 3 days
-    at 4 different times of the day
+    Gets forecast for the next 3 days at 4 different times of the day
     id: an int
     returns an ordered dict with weather forecast information
     '''
     # create Forecaster object
     fc = owm.three_hours_forecast_at_id(id)
     days = collections.OrderedDict()
-    # start with today
     d = date.today()
-    for i in range(4):
-        days[(str(d))] = []
+    for i in range(3):
         d = d + timedelta(1)
+        # get name of day of the week from date
+        day_of_the_week = datetime.strptime(str(d), '%Y-%m-%d').strftime('%A')
+        days[(str(d))] = [day_of_the_week]
     times = [" 6:00:00+00", " 12:00:00+00", " 18:00:00+00", " 23:59:59+00"]
     for key in days.keys():
         for t in times:
             try:
-                # append to current key the weather object for specific time
-                days[key].append(fc.get_weather_at(key+t))
+                # append to current key a dict with the weather info for time t
+                w = fc.get_weather_at(key+t)
+                data = {}
+                data['temp'] = w.get_temperature(unit='celsius')
+                data['status'] = w.get_status()
+                data['detail'] = w.get_detailed_status()
+                days[key].append(data)
             # raises error if time is out of range
             # e.g. getting today's weather at 12 o'clock when current time is past 12
             except NotFoundError:

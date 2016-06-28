@@ -1,21 +1,5 @@
 {% extends "layout.html" %}
-{% block body %}
-	<h3>Enter city and country code</h3>
 
-	<form action="{{ url_for('show_weather') }}" method=post>
-		<div class='form-group'>
-			<label for='city'>City: </label>
-			<input type='text' class='form-control' value='Milan' name='city' required>
-		</div>
-		<div class='form-group'>
-			<label for='country_code'>Country code: </label>
-			<input type='text' class='form-control' value='IT' name='country_code' required>
-		</div>
-		<div class='form-group'>
-			<input type='submit' class='btn btn-default' value='Submit'>
-		</div>
-	</form>
+		{% block content %}<h1>flask-weather-app</h1>
+		<p class='text-center'>Get weather information for any city in the world</p>{% endblock %}
 
-	{% if error %}<p class='text-danger'><strong>Error:</strong> {{ error }}{% endif %}
-
-{% endblock %}

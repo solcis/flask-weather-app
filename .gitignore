@@ -1,5 +1,5 @@
 # database files
 *.db
 
-#test file
-db_test.py
+# compiled python files
+*.pyc
