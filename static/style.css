@@ -17,7 +17,8 @@ html {
 }
 
 #main h1 {
-	padding: 5%;
+	padding: 6% 5% 2% 5%;
+	font-size: 6em;
 }
 
 .row {
@@ -32,10 +33,6 @@ html {
 	font-size: 7em;
 }
 
-#forecast a {
-	color: black;
-}
-
 #forecast .table {
 	table-layout: fixed;
 }
@@ -44,13 +41,10 @@ html {
 	text-align: center;
 }
 
+#forecast h4 a {
+	font-size: 1.65em;
+}
+
 @-moz-document url-prefix() {
   fieldset { display: table-cell; }
 }
-
-/*@media screen and (max-width: 768px) {
-	#main {
-		height: 250px;
-
-	}
-}*/
