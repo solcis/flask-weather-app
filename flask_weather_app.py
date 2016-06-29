@@ -1,3 +1,17 @@
+# -*- coding: utf-8 -*-
+"""
+    flask-weather-app
+    ~~~~~~~~~~~~
+
+    A weather application.
+    Written with Flask and sqlite3. Uses pyowm library
+    to get the weather information from OpenWeatherMap's API.
+
+    :copyright: (2016) by solcis.
+    :license: MIT, see LICENSE for more details.
+
+"""
+
 import os
 from flask import Flask, request, render_template, g
 import pyowm, json, collections, sqlite3
@@ -136,6 +150,8 @@ def get_current_weather(id, code):
     data['temp']= weather.get_temperature(unit='celsius')
     data['status'] = weather.get_status()
     data['detail'] = weather.get_detailed_status()
+    data['icon'] = 'http://openweathermap.org/img/w/' + weather.get_weather_icon_name() + '.png'
+    data['date'] = '{:%a, %d %B}'.format(date.today())
     return data
 
 def get_forecast(id):
@@ -149,10 +165,11 @@ def get_forecast(id):
     days = collections.OrderedDict()
     d = date.today()
     for i in range(3):
+        # add 1 day to d
         d = d + timedelta(1)
-        # get name of day of the week from date
-        day_of_the_week = datetime.strptime(str(d), '%Y-%m-%d').strftime('%A')
-        days[(str(d))] = [day_of_the_week]
+        # get date formatted and add it to dict
+        date_f = '{:%A, %d %B}'.format(d)
+        days[(str(d))] = [date_f,]
     times = [" 6:00:00+00", " 12:00:00+00", " 18:00:00+00", " 23:59:59+00"]
     for key in days.keys():
         for t in times:
@@ -163,6 +180,7 @@ def get_forecast(id):
                 data['temp'] = w.get_temperature(unit='celsius')
                 data['status'] = w.get_status()
                 data['detail'] = w.get_detailed_status()
+                data['icon'] = 'http://openweathermap.org/img/w/' + w.get_weather_icon_name() + '.png'
                 days[key].append(data)
             # raises error if time is out of range
             # e.g. getting today's weather at 12 o'clock when current time is past 12

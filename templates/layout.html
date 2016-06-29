@@ -7,6 +7,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" 
   integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+   	<!--[if lt IE 9]>
+     <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  	<![endif]-->
   <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
 </head>
 
@@ -22,14 +27,14 @@
 				<form class='navbar-form navbar-right'action="{{ url_for('show_weather') }}" role='search' method=post>
 					<div class='form-group'>
 						<label for='city'>City</label>
-						<input type='text' id='q' class='form-control' placeholder='city name' name='city' required>
+						<input type='text' id='q' class='form-control' value='Milan' name='city' required>
 					</div>
 					<div class='form-group'>
 						<label for='country_code'>Country code</label>
-						<input type='text' class='form-control' placeholder='2 letter country code' name='country_code' required>
+						<input type='text' class='form-control' value='IT' name='country_code' required>
 					</div>
 					<div class='form-group'>
-						<input type='submit' id='submit' class='btn btn-default' value='Submit'>
+						<input type='submit' class='btn btn-default' value='Search'>
 					</div>
 				</form>
 			</div>
@@ -49,6 +54,5 @@
   	integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" 
   	crossorigin="anonymous"></script>
 	<script src="{{ url_for('static', filename='script.js') }}"></script>
-	<script src="{{ url_for('static', filename='typeahead.jquery.js') }}"></script>
 
 </body>
