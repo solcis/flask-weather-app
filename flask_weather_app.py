@@ -13,9 +13,9 @@
 """
 
 import os
-from flask import Flask, request, render_template, g
+from flask import Flask, request, render_template, g, jsonify
 import pyowm, json, collections, sqlite3
-from datetime import date, timedelta, datetime
+from datetime import date, timedelta
 from pyowm.exceptions.not_found_error import NotFoundError
 
 
@@ -131,6 +131,17 @@ def search_db(city, code):
     result = [y for x in q for y in x]
     return int(result[0])
 
+@app.route('/search/', methods=['GET'])
+def search():
+    db = get_db()
+    value = request.args.get('city')
+    q = db.cursor().execute("select city, country_code from cities where city like ?", [value])
+    res = [x for x in q]
+    data = []
+    for i in res:
+        data.append({'label': i[0] + ' ' +  i[1], 'city': i[0], 'country_code': i[1]})
+    return jsonify(json_data=data)
+
 def get_current_weather(id, code):
     '''
     Creates an Observation object and retrieves current weather info from it
@@ -187,4 +198,3 @@ def get_forecast(id):
             except NotFoundError:
                 pass
     return days
-

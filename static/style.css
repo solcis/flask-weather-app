@@ -52,3 +52,18 @@ html {
 @-moz-document url-prefix() {
   fieldset { display: table-cell; }
 }
+
+/* jQuery UI customization */
+
+.ui-autocomplete { 
+	position: absolute; 
+	cursor: default;
+} 
+
+.ui-autocomplete-loading { 
+	background: url('loading.gif') right center no-repeat; 
+}
+
+html .ui-autocomplete { 
+	width:1px; jQuery UI
+} /* without this, the menu expands to 100% in IE6 */
