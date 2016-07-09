@@ -42,6 +42,7 @@ body {
 
 .row {
 	color: rgb(51, 51, 51);
+	margin-top: 5%;
 }
 
 #current .panel-heading {
