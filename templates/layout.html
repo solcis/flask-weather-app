@@ -6,6 +6,9 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
+  <!-- google font -->
+  <link rel="stylesheet" type="text/css" href='https://fonts.googleapis.com/css?family=Roboto'>
+  
   <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.11.4/themes/cupertino/jquery-ui.css">
 	<link rel="stylesheet" 
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" 
@@ -84,7 +87,7 @@
 	{% if error %}<div class='container alert alert-danger alert-dismissible' role='alert'><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><strong>Error: </strong>{{ error }}</div>{% endif %}
 
 	{% block body %}
-		<div class='jumbotron' id='main'>
+		<div class='container' id='main'>
 			{% block content %}{% endblock %}
 		</div>
 	{% endblock %}
