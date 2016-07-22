@@ -133,9 +133,14 @@ def search_db(city, code):
 
 @app.route('/search/', methods=['GET'])
 def search():
+    '''
+    Function that works together with Ajax requests to send suggestions as user types
+    returns: data in json format
+    '''
     db = get_db()
-    value = request.args.get('city')
-    q = db.cursor().execute("select city, country_code from cities where city like ?", [value])
+    value = request.args.get('city') + '%'
+    # some entries are duplicated, we use distinct keyword to ignore them
+    q = db.cursor().execute("select distinct city, country_code, lon, lat from cities where city like ? order by city, country_code", [value])
     res = [x for x in q]
     data = []
     for i in res:

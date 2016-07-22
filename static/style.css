@@ -78,15 +78,16 @@ body {
 .ui-autocomplete { 
 	position: absolute; 
 	cursor: default;
+	max-height: 100px;
+  overflow-y: auto;
+  /* prevent horizontal scrollbar */
+  overflow-x: hidden;
 } 
 
 .ui-autocomplete-loading { 
 	background: url('loading.gif') right center no-repeat; 
 }
 
-html .ui-autocomplete { 
-	width:1px; jQuery UI /* without this, the menu expands to 100% in IE6 */
-} 
 
 /* css for small screens */
 
