@@ -26,6 +26,7 @@ And [PyOWM](https://github.com/csparpa/pyowm) library:
   *Open up your terminal and export* `FLASK_APP` *enviroment variable:* `export FLASK_APP=flask_weather_app.py`
   
   *For Windows use set instead of export.*
+  
 3. *Fire up a shell and run this:*
 
   `flask initdb`
