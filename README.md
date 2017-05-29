@@ -1,10 +1,10 @@
 # flask-weather-app
 
 
-####What is flask-weather-app?
+#### What is flask-weather-app?
 A SQLite and Flask powered weather application.
 
-####What do I need to run the application?
+#### What do I need to run the application?
 Assuming you already have Flask installed, if not [go here](http://flask.pocoo.org/docs/0.11/installation/) or if you don't feel like reading just run this command:
 
 `pip install Flask`
@@ -18,7 +18,7 @@ And [PyOWM](https://github.com/csparpa/pyowm) library:
 `pip install pyowm`
 
 
-####How do I use it?
+#### How do I use it?
 
 1. *edit the configuration in the flask_weather_app.py file.*
 2. *tell flask about the right application:*
