@@ -5,9 +5,9 @@
 A SQLite and Flask powered weather application.
 
 #### What do I need to run the application?
-Assuming you already have Flask installed, if not [go here](http://flask.pocoo.org/docs/0.11/installation/) or if you don't feel like reading just run this command:
+Assuming you already have Flask installed, if not [go here](http://flask.pocoo.org/) or if you don't feel like reading just run this command:
 
-`pip install Flask`
+`pip install -U Flask`
 
 *Use of virtualenv is encouraged.*
 
