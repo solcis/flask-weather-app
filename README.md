@@ -2,7 +2,7 @@
 
 
 #### What is flask-weather-app?
-A SQLite and Flask powered weather application.
+A SQLite and Flask powered weather application written in Python 2.7. Not compatible with Python 3 at the moment.
 
 #### What do I need to run the application?
 Assuming you already have Flask installed, if not [go here](http://flask.pocoo.org/) or if you don't feel like reading just run this command:
@@ -15,7 +15,7 @@ You also need an OpenWeatherMap API key. You can get it [here](http://openweathe
 
 And [PyOWM](https://github.com/csparpa/pyowm) library:
 
-`pip install pyowm`
+`pip install pyowm==2.3.2`
 
 
 #### How do I use it?
